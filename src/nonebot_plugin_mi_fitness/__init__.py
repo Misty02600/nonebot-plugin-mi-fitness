@@ -12,9 +12,9 @@ __plugin_meta__ = PluginMetadata(
     description="描述",
     usage="用法",
     type="application",  # application: 功能性插件 | library: 库插件
-    homepage="https://github.com/owner/nonebot-plugin-template",
+    homepage="https://github.com/Misty02600/nonebot-plugin-mi-fitness",
     config=Config,
     # supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
     supported_adapters={"~onebot.v11"},
-    extra={"author": "owner <your@mail.com>"},
+    extra={"author": "Misty02600 <your@mail.com>"},
 )
