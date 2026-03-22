@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card heart-rate">
+  {{ card_header(nickname, icon_url, date, "❤️ 心率") }}
+
+  {% if data.avg_hr > 0 %}
+  <div class="data-section">
+    <div class="big-number">
+      <span class="value">{{ data.avg_hr }}</span><span class="unit">bpm</span>
+      <div class="label">平均心率</div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <div class="data-row">
+      <span class="data-label">最高心率</span>
+      <span class="data-value">{{ data.max_hr }} bpm</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">最低心率</span>
+      <span class="data-value">{{ data.min_hr }} bpm</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">静息心率</span>
+      <span class="data-value">{{ data.avg_rhr if data.avg_rhr > 0 else "--" }} bpm</span>
+    </div>
+    {% if data.latest_hr %}
+    <div class="data-row">
+      <span class="data-label">最新心率</span>
+      <span class="data-value">{{ data.latest_hr.bpm }} bpm</span>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">暂无心率数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

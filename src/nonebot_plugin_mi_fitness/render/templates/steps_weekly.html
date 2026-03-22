@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card weekly">
+  {{ card_header(nickname, icon_url, date, "🚶 步数周报") }}
+
+  {% if valid_data %}
+  <div class="data-section">
+    <div class="data-row">
+      <span class="data-label">📅 共 {{ valid_data|length }} 天数据</span>
+      <span class="data-value"></span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">总步数</span>
+      <span class="data-value">{{ "{:,}".format(total_steps) }} 步</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">日均步数</span>
+      <span class="data-value">{{ "{:,}".format(avg_steps) }} 步</span>
+    </div>
+    {% if total_dist > 0 %}
+    <div class="data-row">
+      <span class="data-label">总距离</span>
+      <span class="data-value">{{ "%.2f"|format(total_dist / 1000) }} km</span>
+    </div>
+    {% endif %}
+    {% if total_cal > 0 %}
+    <div class="data-row">
+      <span class="data-label">总消耗</span>
+      <span class="data-value">{{ "%.0f"|format(total_cal) }} kcal</span>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="data-section">
+    <div class="section-title">📊 每日明细</div>
+    {% for d in valid_data %}
+    <div class="daily-item">
+      <span class="day">{{ ts_to_date(d.time) }}</span>
+      <span>{{ "{:,}".format(d.steps) }}步</span>
+      <span>{{ "%.1f"|format(d.distance / 1000) }}km</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">本周暂无步数数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

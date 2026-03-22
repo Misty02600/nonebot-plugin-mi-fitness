@@ -1,0 +1,290 @@
+/* 小米运动健康 - 数据卡片样式
+ * 所有 px 值按 3x 输出（逻辑尺寸 ×3），输出图片宽 1260px。
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+  background: transparent;
+  color: #333;
+  line-height: 1.6;
+}
+
+.card {
+  width: 1260px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 72px;
+  color: #fff;
+}
+
+.card.heart-rate {
+  background: linear-gradient(135deg, #f5576c 0%, #ff6b6b 100%);
+}
+
+.card.sleep {
+  background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+}
+
+.card.steps {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.card.weight {
+  background: linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%);
+}
+
+.card.daily {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card.weekly {
+  background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+}
+
+/* 头部区域 */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.avatar-wrap {
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 255, 255, 0.6);
+  margin-right: 36px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-placeholder {
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 255, 255, 0.6);
+  margin-right: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  flex-shrink: 0;
+}
+
+.header-info {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 48px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.date {
+  font-size: 36px;
+  opacity: 0.7;
+}
+
+.card-title {
+  font-size: 42px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+/* 数据区域 */
+.data-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 36px;
+  padding: 48px;
+  margin-bottom: 36px;
+}
+
+.data-section:last-child {
+  margin-bottom: 0;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.data-label {
+  font-size: 39px;
+  opacity: 0.8;
+}
+
+.data-value {
+  font-size: 42px;
+  font-weight: 600;
+}
+
+/* 大数字展示 */
+.big-number {
+  text-align: center;
+  padding: 36px 0;
+}
+
+.big-number .value {
+  font-size: 144px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.big-number .unit {
+  font-size: 48px;
+  opacity: 0.7;
+  margin-left: 12px;
+}
+
+.big-number .label {
+  font-size: 39px;
+  opacity: 0.7;
+  margin-top: 12px;
+}
+
+/* 进度条 */
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  margin-top: 24px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: width 0.3s;
+}
+
+/* 睡眠分段条 */
+.sleep-bar {
+  display: flex;
+  height: 36px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+
+.sleep-bar .deep {
+  background: #1a237e;
+}
+
+.sleep-bar .light {
+  background: #5c6bc0;
+}
+
+.sleep-bar .rem {
+  background: #ab47bc;
+}
+
+.sleep-bar .awake {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.sleep-legend {
+  display: flex;
+  justify-content: space-around;
+  font-size: 33px;
+  opacity: 0.8;
+  margin-top: 12px;
+}
+
+.sleep-legend .dot {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+/* 分隔标题 */
+.section-title {
+  font-size: 39px;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* 周报每日明细 */
+.daily-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  font-size: 39px;
+}
+
+.daily-item:last-child {
+  border-bottom: none;
+}
+
+.daily-item .day {
+  opacity: 0.8;
+  width: 150px;
+}
+
+/* 评分展示 */
+.score {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.score .value {
+  font-size: 108px;
+  font-weight: 700;
+}
+
+.score .max {
+  font-size: 42px;
+  opacity: 0.6;
+}
+
+/* 底部 */
+.card-footer {
+  text-align: center;
+  font-size: 33px;
+  opacity: 0.5;
+  margin-top: 36px;
+}
+
+/* 暂无数据 */
+.no-data {
+  text-align: center;
+  padding: 72px 0;
+  font-size: 42px;
+  opacity: 0.6;
+}
+
+/* 日报中的子段落标题 */
+.sub-title {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}

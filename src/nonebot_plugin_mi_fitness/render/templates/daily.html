@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card daily">
+  {{ card_header(nickname, icon_url, summary.date, "📊 健康日报") }}
+
+  {# 心率 #}
+  {% if summary.heart_rate and summary.heart_rate.avg_hr > 0 %}
+  <div class="data-section">
+    <div class="sub-title">❤️ 心率</div>
+    <div class="data-row">
+      <span class="data-label">平均心率</span>
+      <span class="data-value">{{ summary.heart_rate.avg_hr }} bpm</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">最高 / 最低</span>
+      <span class="data-value">{{ summary.heart_rate.max_hr }} / {{ summary.heart_rate.min_hr }}</span>
+    </div>
+    {% if summary.heart_rate.avg_rhr > 0 %}
+    <div class="data-row">
+      <span class="data-label">静息心率</span>
+      <span class="data-value">{{ summary.heart_rate.avg_rhr }} bpm</span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# 睡眠 #}
+  {% if summary.sleep and summary.sleep.total_duration > 0 %}
+  <div class="data-section">
+    <div class="sub-title">😴 睡眠</div>
+    <div class="data-row">
+      <span class="data-label">总时长</span>
+      <span class="data-value">{{ duration_str(summary.sleep.total_duration) }}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">评分</span>
+      <span class="data-value">{{ summary.sleep.sleep_score }}/100</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">深睡 / 浅睡</span>
+      <span class="data-value">{{ duration_str(summary.sleep.sleep_deep_duration) }} / {{ duration_str(summary.sleep.sleep_light_duration) }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  {# 步数 #}
+  {% if summary.steps and summary.steps.steps > 0 %}
+  <div class="data-section">
+    <div class="sub-title">🚶 步数</div>
+    <div class="data-row">
+      <span class="data-label">步数</span>
+      <span class="data-value">{{ "{:,}".format(summary.steps.steps) }} 步</span>
+    </div>
+    {% if summary.steps.distance > 0 %}
+    <div class="data-row">
+      <span class="data-label">距离</span>
+      <span class="data-value">{{ "%.2f"|format(summary.steps.distance / 1000) }} km</span>
+    </div>
+    {% endif %}
+    {% if summary.steps.calories > 0 %}
+    <div class="data-row">
+      <span class="data-label">消耗</span>
+      <span class="data-value">{{ "%.0f"|format(summary.steps.calories) }} kcal</span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if not summary.heart_rate and not summary.sleep and not summary.steps %}
+  <div class="data-section">
+    <div class="no-data">暂无数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

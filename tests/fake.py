@@ -40,6 +40,8 @@ def fake_group_message_event_v11(**field) -> "GroupMessageEventV11":
 
 
 def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
+    import random
+
     from nonebot.adapters.onebot.v11 import Message, PrivateMessageEvent
     from nonebot.adapters.onebot.v11.event import Sender
     from pydantic import create_model
@@ -53,7 +55,7 @@ def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
         sub_type: str = "friend"
         user_id: int = 10
         message_type: Literal["private"] = "private"
-        message_id: int = 1
+        message_id: int = random.randint(1, 10000000)
         message: Message = Message("test")
         raw_message: str = "test"
         font: int = 0

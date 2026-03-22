@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card weight">
+  {{ card_header(nickname, icon_url, date, "⚖️ 体重") }}
+
+  {% if data.weight > 0 %}
+  <div class="data-section">
+    <div class="big-number">
+      <span class="value">{{ "%.1f"|format(data.weight) }}</span><span class="unit">kg</span>
+      <div class="label">体重</div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    {% if data.bmi > 0 %}
+    <div class="data-row">
+      <span class="data-label">BMI</span>
+      <span class="data-value">{{ "%.1f"|format(data.bmi) }}</span>
+    </div>
+    {% endif %}
+    {% if data.time > 0 %}
+    <div class="data-row">
+      <span class="data-label">更新时间</span>
+      <span class="data-value">{{ ts_to_datetime(data.time) }}</span>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">暂无体重数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

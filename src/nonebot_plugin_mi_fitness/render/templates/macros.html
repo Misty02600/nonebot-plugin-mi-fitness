@@ -1,0 +1,17 @@
+{# 卡片头部宏：头像 + 昵称 + 日期 + 标题 #}
+{% macro card_header(nickname, icon_url, date, title) %}
+<div class="card-header">
+  {% if icon_url %}
+    <div class="avatar-wrap">
+      <img class="avatar" src="{{ icon_url }}" alt="avatar">
+    </div>
+  {% else %}
+    <div class="avatar-placeholder">👤</div>
+  {% endif %}
+  <div class="header-info">
+    <div class="nickname">{{ nickname or "未知用户" }}</div>
+    <div class="date">{{ date }}</div>
+    <div class="card-title">{{ title }}</div>
+  </div>
+</div>
+{% endmacro %}

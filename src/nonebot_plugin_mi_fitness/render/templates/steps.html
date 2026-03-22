@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card steps">
+  {{ card_header(nickname, icon_url, date, "🚶 步数") }}
+
+  {% if data.steps > 0 %}
+  <div class="data-section">
+    <div class="big-number">
+      <span class="value">{{ "{:,}".format(data.steps) }}</span><span class="unit">步</span>
+      <div class="label">今日步数</div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    {% if data.distance > 0 %}
+    <div class="data-row">
+      <span class="data-label">距离</span>
+      <span class="data-value">{{ "%.2f"|format(data.distance / 1000) }} km</span>
+    </div>
+    {% endif %}
+    {% if data.calories > 0 %}
+    <div class="data-row">
+      <span class="data-label">消耗</span>
+      <span class="data-value">{{ "%.0f"|format(data.calories) }} kcal</span>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">暂无步数数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

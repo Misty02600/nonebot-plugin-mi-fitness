@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card weekly">
+  {{ card_header(nickname, icon_url, date, "😴 睡眠周报") }}
+
+  {% if valid_data %}
+  <div class="data-section">
+    <div class="data-row">
+      <span class="data-label">📅 共 {{ valid_data|length }} 天数据</span>
+      <span class="data-value"></span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">平均时长</span>
+      <span class="data-value">{{ duration_str(avg_duration) }}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">平均评分</span>
+      <span class="data-value">{{ avg_score }}/100</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">平均深睡</span>
+      <span class="data-value">{{ duration_str(avg_deep) }}</span>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <div class="section-title">📊 每日明细</div>
+    {% for d in valid_data %}
+    <div class="daily-item">
+      <span class="day">{{ ts_to_date(d.time) }}</span>
+      <span>{{ duration_str(d.total_duration) }}</span>
+      <span>评分{{ d.sleep_score }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">本周暂无睡眠数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

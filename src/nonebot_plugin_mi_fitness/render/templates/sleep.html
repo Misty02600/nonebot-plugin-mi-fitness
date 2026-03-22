@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% from "macros.html" import card_header %}
+{% block body %}
+<div class="card sleep">
+  {{ card_header(nickname, icon_url, date, "😴 睡眠") }}
+
+  {% if data.total_duration > 0 %}
+  <div class="data-section">
+    <div class="section-title">睡眠评分</div>
+    <div class="score">
+      <span class="value">{{ data.sleep_score }}</span><span class="max">/100</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">总时长</span>
+      <span class="data-value">{{ duration_str(data.total_duration) }}</span>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <div class="section-title">睡眠结构</div>
+    {% set total = data.sleep_deep_duration + data.sleep_light_duration + data.sleep_rem_duration + data.sleep_awake_duration %}
+    {% if total > 0 %}
+    <div class="sleep-bar">
+      <div class="deep" style="width:{{ (data.sleep_deep_duration / total * 100)|round(1) }}%"></div>
+      <div class="light" style="width:{{ (data.sleep_light_duration / total * 100)|round(1) }}%"></div>
+      <div class="rem" style="width:{{ (data.sleep_rem_duration / total * 100)|round(1) }}%"></div>
+      <div class="awake" style="width:{{ (data.sleep_awake_duration / total * 100)|round(1) }}%"></div>
+    </div>
+    {% endif %}
+    <div class="sleep-legend">
+      <span><span class="dot" style="background:#1a237e"></span>深睡 {{ duration_str(data.sleep_deep_duration) }}</span>
+      <span><span class="dot" style="background:#5c6bc0"></span>浅睡 {{ duration_str(data.sleep_light_duration) }}</span>
+      <span><span class="dot" style="background:#ab47bc"></span>REM {{ duration_str(data.sleep_rem_duration) }}</span>
+      <span><span class="dot" style="background:rgba(255,255,255,0.4)"></span>清醒 {{ duration_str(data.sleep_awake_duration) }}</span>
+    </div>
+  </div>
+
+  {% if data.avg_hr > 0 or data.avg_spo2 > 0 %}
+  <div class="data-section">
+    {% if data.avg_hr > 0 %}
+    <div class="data-row">
+      <span class="data-label">睡眠心率</span>
+      <span class="data-value">{{ data.avg_hr }} bpm</span>
+    </div>
+    {% endif %}
+    {% if data.avg_spo2 > 0 %}
+    <div class="data-row">
+      <span class="data-label">睡眠血氧</span>
+      <span class="data-value">{{ data.avg_spo2 }}%</span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% else %}
+  <div class="data-section">
+    <div class="no-data">暂无睡眠数据</div>
+  </div>
+  {% endif %}
+
+  <div class="card-footer">小米运动健康</div>
+</div>
+{% endblock %}

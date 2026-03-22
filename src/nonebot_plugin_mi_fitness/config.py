@@ -1,14 +1,15 @@
-from nonebot import get_driver, get_plugin_config
+from __future__ import annotations
+
 from pydantic import BaseModel
 
 
 class Config(BaseModel):
-    pass
+    """nonebot-plugin-mi-fitness 配置项。
+
+    当前无需额外配置，登录通过超管发送「小米登录」触发扫码完成。
+    """
 
 
-# 配置加载
-plugin_config: Config = get_plugin_config(Config)
-global_config = get_driver().config
+if not hasattr(Config, "model_fields") and hasattr(Config, "__fields__"):
+    Config.model_fields = Config.__fields__  # type: ignore[attr-defined]
 
-# 全局名称
-NICKNAME: str = next(iter(global_config.nickname), "")
