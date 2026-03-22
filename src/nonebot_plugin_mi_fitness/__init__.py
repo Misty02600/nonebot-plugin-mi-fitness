@@ -41,10 +41,7 @@ async def _on_shutdown() -> None:
 __plugin_meta__ = PluginMetadata(
     name="小米运动健康",
     description="通过小米运动健康亲友共享获取心率、睡眠、步数等健康数据",
-    usage="""基础命令
-  小米帮助 - 查看帮助
-
-绑定管理
+    usage="""绑定管理
   小米绑定 <小米UID> - 发送亲友申请并绑定
   小米解绑 - 解除全局绑定
 

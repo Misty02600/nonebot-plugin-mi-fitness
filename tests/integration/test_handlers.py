@@ -780,18 +780,6 @@ async def test_query_no_data(app: App, store, mock_client):
 
 
 @pytest.mark.asyncio
-async def test_help(app: App, store, mock_client):
-    """帮助命令。"""
-    from nonebot_plugin_mi_fitness.handlers.system import help_cmd
-
-    async with app.test_matcher(help_cmd) as ctx:
-        event = fake_group_message_event_v11(message=Message("/小米帮助"))
-        ctx.receive_event(bot=_ob11_bot(ctx), event=event)
-        ctx.should_call_send(event, ANY)  # pyright: ignore[reportArgumentType]
-        ctx.should_finished(help_cmd)
-
-
-@pytest.mark.asyncio
 async def test_login_timeout_returns_clear_message():
     """系统命令：二维码登录超时时返回重试提示。"""
     from mi_fitness import AuthError

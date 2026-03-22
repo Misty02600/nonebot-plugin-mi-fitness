@@ -7,22 +7,10 @@ from arclet.alconna import Alconna
 from mi_fitness import AuthError
 from nonebot.log import logger
 from nonebot.permission import SUPERUSER
-from nonebot.plugin import get_plugin_by_module_name
 from nonebot_plugin_alconna import Image, Text, UniMessage, on_alconna
 from nonebot_plugin_uninfo import Uninfo
 
 from ..infra.service import qr_login
-
-# 帮助
-help_cmd = on_alconna(Alconna("小米帮助"), use_cmd_start=True, block=True)
-
-
-@help_cmd.handle()
-async def handle_help():
-    """查看帮助。"""
-    plugin = get_plugin_by_module_name(__name__)
-    usage = plugin.metadata.usage if plugin and plugin.metadata else "暂无帮助信息"
-    await help_cmd.finish(usage)
 
 # region 登录
 
